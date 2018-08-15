@@ -15,8 +15,12 @@ def findLastUpdate(soup):
     return toDatetime(cur_update)
 
 def initialParse(last_update, url):
+    data = {}
     page = request.urlopen(url)
     soup = BeautifulSoup(page, "html.parser")
     cur_update = findLastUpdate(soup)
     if last_update == cur_update:
-        return
+        data["last_update"] = last_update
+        return data
+    data["last_update"] = cur_update
+    return data
