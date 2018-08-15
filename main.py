@@ -14,10 +14,13 @@ def findLastUpdate(soup):
     cur_update = re.sub(r".+(\d{4}.+) à (.+)", r"\1 \2", cur_update)
     return toDatetime(cur_update)
 
+def getSoup(url):
+    page = request.urlopen(url)
+    return BeautifulSoup(page, "html.parser")
+
 def initialParse(last_update, url):
     data = {}
-    page = request.urlopen(url)
-    soup = BeautifulSoup(page, "html.parser")
+    soup = getSoup(url)
     cur_update = findLastUpdate(soup)
     if last_update == cur_update:
         data["last_update"] = last_update
