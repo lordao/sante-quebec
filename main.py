@@ -1,4 +1,4 @@
-import datetime as dt
+from datetime import datetime
 import re
 
 from bs4 import BeautifulSoup
@@ -7,7 +7,7 @@ from urllib import request
 STRFTIME = "%Y-%m-%d %H:%M"
 
 def toDatetime(date_str):
-    return dt.strptime(date_str, STRFTIME)
+    return datetime.strptime(date_str, STRFTIME)
 
 def findLastUpdate(soup):
     cur_update = soup.find("p", style="text-align: center;").text
