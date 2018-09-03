@@ -1,0 +1,13 @@
+[[source]]
+
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+
+
+[packages]
+
+BeautifulSoup4 = "*"
+
+[requires]
+
+python_version = "3.6"
