@@ -43,10 +43,11 @@ def parseInstallation(cols):
     data = [col.text for col in cols]
     installation = {
         "nom": data[0],
-        "civieres_fonctionnelles": data[1],
-        "civieres_occupees": data[2],
-        "patients_plus_24": data[4],
-        "patients_plus_48": data[5]
+        "civieres_fonctionnelles": int(data[1]),
+        "civieres_occupees": int(data[2]),
+        "taux_occupation": float("0." + data[3][:-1]),
+        "patients_plus_24": int(data[4]),
+        "patients_plus_48": int(data[5])
     }
     return installation
 
