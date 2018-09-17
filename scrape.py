@@ -33,13 +33,13 @@ def getUrgenceTables(citiesSoup):
 
 def getInstallations(uTablesSoup):
     return [
-        [parseInstallation(row.findChildren("td"))
+        [scrapeInstallation(row.findChildren("td"))
          for row in table.findChildren("tr")[1:]]
         for table in uTablesSoup
     ]
 
 
-def parseInstallation(cols):
+def scrapeInstallation(cols):
     data = [col.text for col in cols]
     installation = {
         "nom": data[0],
@@ -60,12 +60,12 @@ def scrapePage(soup):
     return dict(zip(citiesNames, installations))
 
 
-def initialParse(last_update, url):
-    data = {}
+def scrape(url, last_update=None):
     soup = getSoup(url)
     cur_update = findLastUpdate(soup)
+    print(cur_update)
     if last_update == cur_update:
-        data["last_update"] = last_update
-        return data
+        return {"last_update": last_update}
+    data = scrapePage(soup)
     data["last_update"] = cur_update
     return data
