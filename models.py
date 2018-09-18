@@ -1,6 +1,5 @@
 import inspect
 import sys
-from datetime import datetime
 
 import peewee
 
@@ -8,7 +7,7 @@ db = peewee.SqliteDatabase("sante.db")
 
 
 class Scrape(peewee.Model):
-    scrape_date = peewee.DateTimeField(default=datetime.now())
+    scrape_date = peewee.DateTimeField()
 
     class Meta:
         database = db
