@@ -1,3 +1,6 @@
+import inspect
+import sys
+
 import peewee
 
 db = peewee.SqliteDatabase("sante.db")
@@ -25,3 +28,12 @@ class HospitalRecord(peewee.Model):
 
     class Meta:
         database = db
+
+
+models = inspect.getmembers(sys.modules[__name__], inspect.isclass)
+models = dict(models).values()
+for model in models:
+    try:
+        model.create_table()
+    except peewee.OperationalError:
+        print("Table {} already exists!".format(model.__name__))
