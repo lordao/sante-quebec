@@ -32,4 +32,4 @@ def main():
             record["hospital"] = hospital.id
             record["scrape"] = scrape_id
             all_records.append(record)
-    HospitalRecord.insert_many(records).execute()
+    HospitalRecord.insert_many(all_records).execute()
