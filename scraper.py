@@ -63,7 +63,6 @@ def scrapePage(soup):
 def scrape(url, last_update=None):
     soup = getSoup(url)
     cur_update = findLastUpdate(soup)
-    print(cur_update)
     if last_update == cur_update:
         return {"last_update": last_update}
     data = scrapePage(soup)

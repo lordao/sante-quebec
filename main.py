@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from scraper import scrape
 from models import Scrape, Region, Hospital, HospitalRecord
 
@@ -12,6 +13,7 @@ def last_scrape():
 
 def main():
     last_update = last_scrape()
+    print("Last update: {}".format(last_update))
     print("Fetching page...")
     data = scrape("https://www.indexsante.ca/urgences/", last_update)
     cur_update = data.pop("last_update", last_update)
@@ -33,3 +35,7 @@ def main():
             record["scrape"] = scrape_id
             all_records.append(record)
     HospitalRecord.insert_many(all_records).execute()
+
+
+if __name__ == "__main__":
+    main()
