@@ -53,3 +53,5 @@ class RiskValue(models.Model):
         indexes = [
             models.Index(fields=["risk_object"])
         ]
+
+        unique_together = ("risk_object", "risk_field")
