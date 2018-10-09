@@ -20,7 +20,7 @@ class RiskField(models.Model):
         ordering = ("risk_type", "name")
 
 
-class RiskEnums(models.Model):
+class RiskEnum(models.Model):
     """Possible values for a given enum RiskField."""
     value = models.TextField()
     field = models.ForeignKey(RiskField, on_delete=models.CASCADE)
@@ -37,10 +37,16 @@ class RiskInstance(models.Model):
     risk_type = models.ForeignKey(RiskType, on_delete=models.CASCADE)
 
 
-class RiskValues(models.Model):
+class RiskValue(models.Model):
     """Represents the values of the fields a RiskInstance has."""
-    risk_object = models.ForeignKey(RiskInstance, on_delete=models.CASCADE)
-    risk_field = models.ForeignKey(RiskField, on_delete=models.CASCADE)
+    risk_object = models.ForeignKey(
+        RiskInstance,
+        on_delete=models.CASCADE,
+        primary_key=True)
+    risk_field = models.ForeignKey(
+        RiskField,
+        on_delete=models.CASCADE,
+        primary_key=True)
     value = models.TextField()
 
     class Meta:
